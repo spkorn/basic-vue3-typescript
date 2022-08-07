@@ -6,7 +6,7 @@
     <button @click="onClickAdd1">Add1</button>
     <button @click="onClickAdd2">Add2</button>
     <hr />
-    <span>#Account: {{ account }}</span
+    <span>#Account: {{ states.account }}</span
     ><br />
     <button @click="onClickClearAccount">Clear</button>
   </div>
@@ -15,11 +15,15 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
 
+const defaultAccount = { username: "", password: "" };
+
 export default defineComponent({
   setup() {
     let count1 = 1;
     const count2 = ref<number>(2);
-    const account = reactive({ username: "admin", password: "1234" });
+    const states = reactive({
+      account: { username: "admin", password: "1234" },
+    });
 
     const onClickAdd1 = () => {
       count1 = count1 + 1;
@@ -32,8 +36,9 @@ export default defineComponent({
     };
 
     const onClickClearAccount = () => {
-      account.username = "";
-      account.password = "";
+      // account.username = "";
+      // account.password = "";
+      states.account = defaultAccount;
     };
 
     return {
@@ -41,7 +46,7 @@ export default defineComponent({
       count2,
       onClickAdd1,
       onClickAdd2,
-      account,
+      states,
       onClickClearAccount,
     };
   },
