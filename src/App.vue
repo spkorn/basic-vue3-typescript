@@ -5,16 +5,21 @@
     <span>#Count2: {{ count2 }}</span> <br />
     <button @click="onClickAdd1">Add1</button>
     <button @click="onClickAdd2">Add2</button>
+    <hr />
+    <span>#Account: {{ account }}</span
+    ><br />
+    <button @click="onClickClearAccount">Clear</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    let count1 = 11;
+    let count1 = 1;
     const count2 = ref<number>(2);
+    const account = reactive({ username: "admin", password: "1234" });
 
     const onClickAdd1 = () => {
       count1 = count1 + 1;
@@ -26,11 +31,18 @@ export default defineComponent({
       console.log("count2 = " + count2.value);
     };
 
+    const onClickClearAccount = () => {
+      account.username = "";
+      account.password = "";
+    };
+
     return {
       count1,
       count2,
       onClickAdd1,
       onClickAdd2,
+      account,
+      onClickClearAccount,
     };
   },
 });
