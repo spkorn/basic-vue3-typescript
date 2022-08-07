@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, onMounted, reactive, ref } from "vue";
 
 const defaultAccount = { username: "", password: "" };
 
@@ -23,6 +23,10 @@ export default defineComponent({
     const count2 = ref<number>(2);
     const states = reactive({
       account: { username: "admin", password: "1234" },
+    });
+
+    onMounted(() => {
+      setInterval(onClickAdd2, 1000);   // เมื่อ component นี้ถูกสร้างจะทำการ execute onClickAdd2 ทุกๆ 1 วินาที
     });
 
     const onClickAdd1 = () => {
