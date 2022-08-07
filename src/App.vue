@@ -9,15 +9,23 @@
     <span>#Account: {{ states.account }}</span
     ><br />
     <button @click="onClickClearAccount">Clear</button>
+    <hr />
+    <LoginForm />
+    <login-form />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from "vue";
+import LoginForm from "@/components/LoginForm.vue";
 
 const defaultAccount = { username: "", password: "" };
 
 export default defineComponent({
+  components: {
+    LoginForm,
+  },
+
   setup() {
     let count1 = 1;
     const count2 = ref<number>(2);
@@ -26,7 +34,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      setInterval(onClickAdd2, 1000);   // เมื่อ component นี้ถูกสร้างจะทำการ execute onClickAdd2 ทุกๆ 1 วินาที
+      setInterval(onClickAdd2, 1000); // เมื่อ component นี้ถูกสร้างจะทำการ execute onClickAdd2 ทุกๆ 1 วินาที
     });
 
     const onClickAdd1 = () => {
